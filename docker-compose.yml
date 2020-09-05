@@ -3,7 +3,8 @@ version: '3.6'
 services:
         vpnsocks:
                 build: .
-                volumes: ./profile:/etc/openvpn/:ro
+                volumes:
+                - ./profile:/etc/openvpn/:ro
                 ports:
                 - 127.0.0.1:1080:1080
 
