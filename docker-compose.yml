@@ -7,4 +7,7 @@ services:
                 - ./profile:/etc/openvpn/:ro
                 ports:
                 - 127.0.0.1:1080:1080
+                environment:
+                - OPENVPN_USERNAME
+                - OPENVPN_PASSWORD
 
