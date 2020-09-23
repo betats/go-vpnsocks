@@ -2,9 +2,7 @@ name: Docker Image CI
 
 on:
   push:
-    branches: [ master ]
-  pull_request:
-    branches: [ master ]
+    tags:
 
 jobs:
 
@@ -20,5 +18,5 @@ jobs:
         echo ${{ secrets.CR_PAT }} | docker login ghcr.io -u $GITHUB_ACTOR --password-stdin
         # # new container registry urls added
         docker pull ghcr.io/betats/vpnsocks:latest
-        docker build . --tag ghcr.io/betats/vpnsocks:$GITHUB_SHA --cache-from ghcr.io/betats/vpnsocks:latest
-        docker push ghcr.io/betats/vpnsocks:$GITHUB_SHA
+        docker build . --tag ghcr.io/betats/vpnsocks:latest --cache-from ghcr.io/betats/vpnsocks:latest
+        docker push ghcr.io/betats/vpnsocks:latest
