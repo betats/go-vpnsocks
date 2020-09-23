@@ -3,8 +3,10 @@ package main
 import (
 	"fmt"
 	"io/ioutil"
+	"math/rand"
 	"os"
 	"strings"
+	"time"
 
 	"github.com/armon/go-socks5"
 	"github.com/mysteriumnetwork/go-openvpn/openvpn3"
@@ -61,11 +63,20 @@ func main() {
 
 	openvpn3.SelfCheck(logger)
 
-	bytes, err := ioutil.ReadFile("/etc/openvpn/profile.ovpn")
+	rootDir := "/etc/openvpn/"
+	files, err := ioutil.ReadDir(rootDir)
+	if err != nil {
+		panic(err)
+	}
+	rand.Seed(time.Now().UnixNano())
+	ovpnFile := rootDir + files[rand.Intn(len(files))].Name()
+
+	bytes, err := ioutil.ReadFile(ovpnFile)
 	if err != nil {
 		fmt.Println(err.Error())
 		os.Exit(1)
 	}
+
 	config := openvpn3.NewConfig(string(bytes))
 
 	session := openvpn3.NewSession(config, openvpn3.UserCredentials{Username: username, Password: password}, &loggingCallbacks{})
