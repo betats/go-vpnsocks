@@ -2,12 +2,15 @@ version: '3.6'
 
 services:
         vpnsocks:
-                build: .
+                image: ghcr.io/betats/vpnsocks:latest
+                cap_add:
+                        - NET_ADMIN
                 volumes:
-                - ./profile:/etc/openvpn/:ro
+                        - ./profile:/etc/openvpn/:ro
                 ports:
-                - 127.0.0.1:1080:1080
+                        - 127.0.0.1:1080:1080
                 environment:
-                - OPENVPN_USERNAME
-                - OPENVPN_PASSWORD
-
+                        - OPENVPN_USERNAME
+                        - OPENVPN_PASSWORD
+                devices:
+                        - /dev/net/tun:/dev/net/tun
