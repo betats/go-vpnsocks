@@ -4,7 +4,7 @@ on:
   push:
     tags:
   schedule:
-    cron: 0 4 * * *
+    - cron: 0 4 * * *
 
 jobs:
 
