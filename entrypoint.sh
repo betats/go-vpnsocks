@@ -11,9 +11,9 @@ if [ -e $ADD_PRIVATE_NETWORK ]; then
 	ip router add $ADD_PRIVATE_NETWORK via $DEFAULT_GW
 fi
 
-## DNS resolver modify from private to Gloval standard
-
-echo "nameserver 1.1.1.1" > /etc/resolv.conf
-echo "nameserver 8.8.8.8" >> /etc/resolv.conf
+## DNS resolver modify from private resolver
+### dns query need to via VPN
+echo nameserver $DNS_RESOLVER1 > /etc/resolv.conf
+echo nameserver $DNS_RESOLVER2 > /etc/resolv.conf
 
 /usr/local/bin/go-vpnsocks
