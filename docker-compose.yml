@@ -12,7 +12,8 @@ services:
     environment:
       - OPENVPN_USERNAME
       - OPENVPN_PASSWORD
-      - DNS_RESOLVER1=1.1.1.1
-      - DNS_RESOLVER2=1.0.0.1
     devices:
       - /dev/net/tun:/dev/net/tun
+    dns:
+      - 1.1.1.1
+      - 8.8.8.8
