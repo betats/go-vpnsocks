@@ -82,17 +82,19 @@ func main() {
 	session := openvpn3.NewSession(config, openvpn3.UserCredentials{Username: username, Password: password}, &loggingCallbacks{})
 	session.Start()
 
-	// Create a SOCKS5 server
-	conf := &socks5.Config{}
-	server, err := socks5.New(conf)
-	if err != nil {
-		panic(err)
-	}
-
-	// Create SOCKS5 proxy port 1080
-	if err := server.ListenAndServe("tcp", "0.0.0.0:1080"); err != nil {
-		panic(err)
-	}
+	go func(){
+		// Create a SOCKS5 server
+		// background process
+		conf := &socks5.Config{}
+		server, err := socks5.New(conf)
+		if err != nil {
+			panic(err)
+		}
+		// Create SOCKS5 proxy port 1080
+		if err := server.ListenAndServe("tcp", "0.0.0.0:1080"); err != nil {
+			panic(err)
+		}
+	}()
 
 	// openvpn session
 	err = session.Wait()
