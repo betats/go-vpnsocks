@@ -1,4 +1,4 @@
-module github.com/betats/go-vpnsocks/cmd/vpnsocks
+module github.com/betats/go-vpnsocks/cmd
 
 go 1.14
 
