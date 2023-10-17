@@ -21,7 +21,6 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
 
     - name: Build the Docker image
-      uses: actions/checkout@v2
       run: |
         docker pull ghcr.io/betats/vpnsocks:latest
         docker build . --tag ghcr.io/betats/vpnsocks:$GITHUB_SHA --cache-from ghcr.io/betats/vpnsocks:latest
