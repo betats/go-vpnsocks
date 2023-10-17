@@ -1,10 +1,10 @@
-FROM golang:buster as builder
+FROM golang:bookworm as builder
 
-RUN go get github.com/betats/go-vpnsocks/cmd
+RUN go install github.com/betats/go-vpnsocks/cmd@latest
 RUN apt-get update \
  && apt-get install -y tini
 
-FROM debian:buster
+FROM debian:bookworm
 COPY --from=builder /go/bin/cmd /usr/local/bin/go-vpnsocks
 COPY --from=builder /usr/bin/tini /usr/bin/tini
 COPY entrypoint.sh /usr/local/bin/entrypoint.sh
