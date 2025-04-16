@@ -9,4 +9,4 @@ require (
 	github.com/mysteriumnetwork/go-openvpn v0.0.23
 )
 
-require golang.org/x/net v0.36.0 // indirect
+require golang.org/x/net v0.38.0 // indirect
